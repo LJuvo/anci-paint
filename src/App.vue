@@ -5,7 +5,9 @@
       <PaintMenu @select="selectMenu($event)" />
 
       <div class="anci-wrapper">
-        <SeaPaint v-if="!isLoading" :paintOption="paintOption" />
+        <transition name="fade" :duration="1000">
+          <SeaPaint v-if="!isLoading" :paintOption="paintOption" />
+        </transition>
       </div>
     </div>
   </section>
@@ -42,7 +44,6 @@ export default defineComponent({
         backgroundStyle.value = `background-image: "${bg}";`;
         theme.backgroundImage = bg;
         paintOption.value = cell;
-        console.log(" paintOption ->", paintOption);
         isLoading.value = false;
       },
     };
@@ -87,10 +88,23 @@ export default defineComponent({
   height: 100%;
   transform: translateZ(0);
   background-image: v-bind("theme.backgroundImage");
-  background-color: #ffffff;
+  transition: background-image 1.2s linear;
 }
 .anci-wrapper {
   flex: 1;
   height: 100%;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s ease;
 }
 </style>

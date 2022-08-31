@@ -34,7 +34,6 @@ export default defineComponent({
       const ele = document.getElementById("openseadragonWrapper");
       ele!.innerHTML = "";
       const baseOption = props.paintOption;
-      console.log("baseOption ->", baseOption);
 
       if (baseOption && baseOption.id) {
         initOpenSeadragon({
@@ -88,8 +87,7 @@ export default defineComponent({
 
     watch(
       () => props.paintOption,
-      (baseOption) => {
-        console.log("watch baseOption ->", baseOption);
+      () => {
         initViewer();
       }
     );
